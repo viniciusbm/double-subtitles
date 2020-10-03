@@ -59,7 +59,7 @@ def convert_tags(s):
     s = s.replace('<i>', '{\\i1}')
     s = s.replace('<b>', '{\\b1}')
     s = s.replace('<u>', '{\\u1}')
-    s = re.sub(r'<font\s*color\s*=\s*[\'"]#(..)(..)(..)[\'"]\s*>(.*?)</font>', r'{\\c&H\3\2\1&}\4{\\c}', s)
+    s = re.sub(r'<font\s*color\s*=\s*[\'"]#(..)(..)(..)[\'"]\s*>(.*?)</font>', r'{\\c&H\3\2\1&}\4{\\c}', s, flags=re.DOTALL)
     s = s.replace('</i>', '{\\i0}')
     s = s.replace('</b>', '{\\b0}')
     s = s.replace('</u>', '{\\u0}')
