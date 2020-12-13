@@ -80,32 +80,36 @@ def parse(filename, encoding):
     except:
         return None
 
-encodings = ['utf-8-sig', 'ascii', 'cp1252', 'utf-8']
 
-for enc in encodings:
-    s1 = parse(sys.argv[1], enc)
-    if s1:
-        break
+def main():
+    encodings = ['utf-8-sig', 'ascii', 'cp1252', 'utf-8']
 
-for enc in encodings:
-    s2 = parse(sys.argv[2], enc)
-    if s2:
-        break
+    for enc in encodings:
+        s1 = parse(sys.argv[1], enc)
+        if s1:
+            break
 
-if s1 is None:
-    print('Could not open the first file', file=sys.stderr)
-if s2 is None:
-    print('Could not open the second file', file=sys.stderr)
-if s1 is None or s2 is None:
-    exit(1)
+    for enc in encodings:
+        s2 = parse(sys.argv[2], enc)
+        if s2:
+            break
+
+    if s1 is None:
+        print('Could not open the first file', file=sys.stderr)
+    if s2 is None:
+        print('Could not open the second file', file=sys.stderr)
+    if s1 is None or s2 is None:
+        exit(1)
 
 
-print(header)
+    print(header)
 
-inf = float('Inf')
-while s1.next_time() < inf or s2.next_time() < inf:
-    if s1.next_time() < s2.next_time():
-        print_dialogue(s1.next_dialogue(), 'TOP')
-    else:
-        print_dialogue(s2.next_dialogue(), 'BOT')
+    inf = float('Inf')
+    while s1.next_time() < inf or s2.next_time() < inf:
+        if s1.next_time() < s2.next_time():
+            print_dialogue(s1.next_dialogue(), 'TOP')
+        else:
+            print_dialogue(s2.next_dialogue(), 'BOT')
 
+if __name__ == '__main__':
+    main()
